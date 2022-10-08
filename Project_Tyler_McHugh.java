@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Project_Tyler_McHugh{
 
    public static void main(String[] args){
+    //try statement to run the code and catch any io exceptions that occur
     try{
       int policyNumber;
       String providerName;
@@ -16,13 +17,15 @@ public class Project_Tyler_McHugh{
       double weight; 
       int policySmoker =0;
       int nonPolicySmoker = 0;
-      
+      //declare the file and create the scanner 
       File file = new File("PolicyInformation.txt");
       Scanner inputFile = new Scanner(file);
       
       //Scanner keyboard = new Scanner(System.in);
       ArrayList<Policy> policies = new ArrayList<Policy>();
-      
+      /*Using a while loop to read input from a file
+      *@return policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight
+      */
       while(inputFile.hasNext())
       {
          policyNumber = inputFile.nextInt();
@@ -37,6 +40,7 @@ public class Project_Tyler_McHugh{
        
          height = inputFile.nextDouble();
          weight = inputFile.nextDouble();
+         //using if/else statement to count the number of smoking and non smoking policies
          if(smokingStatus.equals("smoker"))
          {
           policySmoker++;
@@ -50,11 +54,12 @@ public class Project_Tyler_McHugh{
             inputFile.nextLine();
             inputFile.nextLine();
          }
+         //create the policy and add to the array list 
          Policy policy = new Policy(policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight);
          policies.add(policy);
       }
-      inputFile.close();
-      
+      inputFile.close(); //close the input file 
+      //create a for statement to output the data that was read from the file as an array list 
       for(int i = 0; i < policies.size(); i++)
       {
          System.out.printf("Policy Number: %d\n", policies.get(i).getpNumber());
@@ -75,7 +80,7 @@ public class Project_Tyler_McHugh{
       System.out.println("The number of policies with a smoker is: " + policySmoker);
       System.out.println("The number of policies with a non-smoker is: " + nonPolicySmoker);
       }
-      catch(IOException ex)
+      catch(IOException ex)//catches IO exceptions 
       {
          System.out.println("Something went wrong reading the file: " + ex.getMessage());
       }
