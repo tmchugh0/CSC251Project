@@ -5,29 +5,29 @@
       //private instance variables 
       private int pNumber;
       private String pName; 
-      private String fName; 
-      private String lName;
-      private int pAge; 
-      private String smoker;
-      double pHeight;
-      double pWeight;
+      private PolicyHolder policyHolder;
+     
       
       //constructor that accepts arguments
-      public Policy(int pNumber, String pName, String fName, String lName, int pAge, String smoker, double pHeight, double pWeight){
+      public Policy(int pNumber, String pName, PolicyHolder holder){
          this.pNumber = pNumber;
-         this.pName = pName;   
-         this.fName = fName;
-         this.lName = lName;
-         this.pAge = pAge;
-         this.smoker = smoker;
-         this.pHeight = pHeight;
-         this.pWeight = pWeight;
-      
+         this.pName = pName; 
+         this.policyHolder = new PolicyHolder(holder);  
+               
       //calculate BMI
+      }
+      public void setPolicyHolder(PolicyHolder holder)
+      {
+         policyHolder = new PolicyHolder(holder);
+      }
+      public PolicyHolder getPolicyHolder()
+      {
+         return new PolicyHolder(policyHolder);
       }
       public double getBMI()
       {
-         return(pWeight*703)/(pHeight*pHeight);
+         
+         return(policyHolder.getWeight()*703)/(policyHolder.getHeight()*policyHolder.getHeight());
       
       }
       //calculate policy price
@@ -41,12 +41,12 @@
          
          policyCost = policyCost + basePrice;
          //if statement to see if they are over 50
-         if(pAge>50)
+         if(policyHolder.getAge()>50)
          {
             policyCost = policyCost + addFee;
          }
          //Check if smoker and calculate additional fee
-         if(smoker.equals("smoker"))
+         if(policyHolder.getSmoker().equals("smoker"))
          {
             policyCost = policyCost + smokerFee; 
          
@@ -78,55 +78,12 @@
       {
          this.pName = pName;
       }
-      public String getfName()
+      public String toString()
       {
-         return fName;
+         return String.format("Policy Name: " + pName + "\nPolicy Number: " + pNumber + "\nPolicyHolder's BMI: %.2f"+ "\nPolicy Holder: "+ policyHolder.toString()+"\nPolicy Price: %.2f \n", getBMI(),getPolicyPrice());
+         
       }
-      public void setfName(String fName)
-      {
-         this.fName = fName;
-      }
-      public String getlName()
-      {
-         return lName;
-      }
-      public void setlName(String lName)
-      {
-         this.lName = lName;
-      }
-      public int getAge()
-      {
-         return pAge;
-      }
-      public void setAge(int pAge)
-      {
-         this.pAge = pAge;
-      }
-      public String getSmoker()
-      {
-         return smoker;
-      }
-      public void setSmoker(String smoker)
-      {
-         this.smoker = smoker;
-      }
-      public double getHeight()
-      {
-         return pHeight;
-      }
-      public void setHeight(double pHeight)
-      {
-         this.pHeight = pHeight;
-      }
-      public double getWeight()
-      {
-         return pWeight;
-      }
-      public void setWeight(double pWeight)
-      {
-         this.pWeight = pWeight;
-      }
-      }
+    }
       
    
    

@@ -1,6 +1,7 @@
 import java.util.Scanner ;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.*;
 
 public class Project_Tyler_McHugh{
 
@@ -8,6 +9,7 @@ public class Project_Tyler_McHugh{
     //try statement to run the code and catch any io exceptions that occur
     try{
       int policyNumber;
+      int policyCreated=0;
       String providerName;
       String firstName;
       String lastName;
@@ -55,14 +57,17 @@ public class Project_Tyler_McHugh{
             inputFile.nextLine();
          }
          //create the policy and add to the array list 
-         Policy policy = new Policy(policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight);
+         PolicyHolder myPolicyHolder = new PolicyHolder(firstName, lastName, age, smokingStatus, height, weight);
+         Policy policy = new Policy(policyNumber, providerName, myPolicyHolder);
          policies.add(policy);
+         policyCreated++;
+         
       }
       inputFile.close(); //close the input file 
       //create a for statement to output the data that was read from the file as an array list 
       for(int i = 0; i < policies.size(); i++)
       {
-         System.out.printf("Policy Number: %d\n", policies.get(i).getpNumber());
+         /*System.out.printf("Policy Number: %d\n", policies.get(i).getpNumber());
          System.out.printf("Provder Name: %s\n", policies.get(i).getpName());
          System.out.printf("Policyholder's First Name: %s\n", policies.get(i).getfName());
          System.out.printf("Policyholder's Last Name: %s\n", policies.get(i).getlName());
@@ -72,20 +77,27 @@ public class Project_Tyler_McHugh{
          System.out.println("Policyholder's Weight: "  + policies.get(i).getWeight()+ " pounds");
          System.out.printf("Policyholder's BMI: %.2f\n", policies.get(i).getBMI());
          System.out.printf("Policy Price: $%.2f\n", policies.get(i).getPolicyPrice());
+         System.out.println();*/
+         System.out.println("Policy Information");
+         System.out.println(policies.get(i));
          System.out.println();
 
       
       
       }
-      System.out.println("The number of policies with a smoker is: " + policySmoker);
+ 
+      
+     System.out.println("The number of policies created is: " + policyCreated);
+     System.out.println("The number of policies with a smoker is: " + policySmoker);
       System.out.println("The number of policies with a non-smoker is: " + nonPolicySmoker);
       }
       catch(IOException ex)//catches IO exceptions 
       {
          System.out.println("Something went wrong reading the file: " + ex.getMessage());
       }
-      /*
-      System.out.print("Please enter the Policy Number: ");
+      
+  
+      /*System.out.print("Please enter the Policy Number: ");
       policyNumber = keyboard.nextInt();
       keyboard.nextLine();
       System.out.print("Please enter the Provider Name: ");
@@ -103,10 +115,12 @@ public class Project_Tyler_McHugh{
       height = keyboard.nextDouble();
       System.out.print("Please enter the Policyholder's Weight(in pounds): ");
       weight = keyboard.nextDouble();
-      */
-      
-      // Policy policy = new Policy(policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight);
-      /*
+  
+      PolicyHolder myPolicyHolder = new PolicyHolder(firstName, lastName, age, smokingStatus, height, weight);
+      Policy policy = new Policy(policyNumber, providerName, myPolicyHolder);
+      policies.add(policy);
+     
+     
       System.out.printf("Policy Number: %d\n", policy.getpNumber());
       System.out.printf("Provder Name: %s\n", policy.getpName());
       System.out.printf("Policyholder's First Name: %s\n", policy.getfName());
@@ -117,7 +131,10 @@ public class Project_Tyler_McHugh{
       System.out.println("Policyholder's Weight: "  + policy.getWeight()+ " pounds");
       System.out.printf("Policyholder's BMI: %.2f\n", policy.getBMI());
       System.out.printf("Policy Price: $%.2f\n", policy.getPolicyPrice());
+      }
       */
-     }
+      }
+   
+    
 }
       
